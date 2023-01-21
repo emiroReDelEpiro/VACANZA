@@ -5,7 +5,7 @@ if($_SESSION['valid'] == false) {
     header("Location: loginPage.php");
 }
 
-$json_file = file_get_contents('test.json');
+$json_file = file_get_contents('metadata/graph.json');
 $localita = json_decode($json_file, true);
 
 require_once ('lib/jpgraph/src/jpgraph.php');

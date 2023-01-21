@@ -1,4 +1,14 @@
+<?php
+    session_start();
+    
+    if($_SESSION['valid'] == false) {
+        header("Location: loginPage.php");
+    }
 
+    $json_file = file_get_contents('metadata/graph.json');
+    $localita = json_decode($json_file, true);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,30 +34,34 @@
 
                             <div class="mb-md-5 mt-md-4 pb-5">
 
-                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                                <h2 class="fw-bold mb-2 text-uppercase">Localita</h2>
 
-                                <form method="post" action="login.php">
+                                <form method="post" action="AddRisultato.php">
 
-                                    <?php if (isset($_GET['valid'])) { ?>
-
-                                        <p class="error"><?php echo $_GET['valid']; ?></p>
-
-                                    <?php } ?>                                
-
+    
                                     <div class="form-outline form-white mb-4">
-                                        <input type="text" id="typeEmailX" class="form-control form-control-lg" required name="username"/>
-                                        <label class="form-label" for="typeEmailX">Username</label>
+                                        <label class="form-label" for="nome">Nome</label>
+                                        <input type="text" id="typeEmailX" class="form-control form-control-lg" name="nome" required/>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="password" id="typePasswordX"
-                                            class="form-control form-control-lg" name="password" required/>
-                                        <label class="form-label" for="typePasswordX">Password</label>
+                                        <label class="form-label" for="cognome">Cognome</label>
+                                        <input type="text" id="typeEmailX" class="form-control form-control-lg" name="cognome" required/>
                                     </div>
 
-                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="forgotPasswordPage.php">Forgot
-                                            password?</a></p>
+                                    <div class="form-outline form-white mb-4">
+                                        <label class="form-label" for="localita">Localita :</label>
+                                         <!-- <select name="localita" id="localita" class="form-control form-control-lg">
+                                            <?php foreach ($localita as $loc): ?>
+                                            <option value="<?php echo $loc['localita'] ?>"><?php echo $loc['localita'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>-->
+
+                                        <select name="localita" id="localita" class="form-control form-control-lg">
+                                            <option value="Mare">Mare</option>
+                                            <option value="Montagna">Montagna</option>
+                                        </select>
+                                        </div>
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
@@ -59,12 +73,6 @@
                                     </div>
 
                             </div>
-
-                            <div>
-                                <p class="mb-0">Don't have an account? <a href="registerPage.php" class="text-white-50 fw-bold">Sign
-                                        Up</a>
-                                </p>
-                            </div>
                             </form>
 
                         </div>
@@ -74,5 +82,4 @@
         </div>
     </section>
 </body>
-
 </html>

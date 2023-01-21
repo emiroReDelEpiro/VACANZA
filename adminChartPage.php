@@ -1,14 +1,20 @@
 <?php
+    session_start();
 
-session_start();
-if($_SESSION['valid'] == false) {
-    header("Location: loginPage.php");
-}
+    if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+    
+    if($_SESSION['valid'] == false) {
+        header("Location: loginPage.php");
+    }
 
-$json_file = file_get_contents('test.json');
-$localita = json_decode($json_file, true);
+    $json_file = file_get_contents('metadata/graph.json');
+    $localita = json_decode($json_file, true);
+    
+    unset($_SESSION["logged_in"]);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +50,9 @@ $localita = json_decode($json_file, true);
                                         endforeach;
                                     ?>
                                 </div>
-
+                                <form action="loginPage.php">
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Exit</button>
+                                </form>
                             </div>
                         </div>
                     </div>

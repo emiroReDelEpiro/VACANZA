@@ -1,10 +1,10 @@
 <?php
-// get the token from the URL
+
     session_start();
     $token = $_GET['token'];
-// check if the token is valid
 
-    $data = file_get_contents("login.json"); 
+
+    $data = file_get_contents("metadata/login.json"); 
     $jsonArray = json_decode($data, true);
     
     $valid = false;

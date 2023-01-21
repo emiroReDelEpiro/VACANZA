@@ -7,16 +7,16 @@ $localita_post = $_POST['localita'];
 
 
 if(preg_match("[\d]",$nome)) {
-    header("Location: index.php");
+    header("Location: votePage.php");
 }
 else if(preg_match("[\d]",$nome)) {
-    header("Location: index.php");
+    header("Location: votePage.php");
 }
 else {
     $localita[] = ['nome' => $nome, 'localita' => $localita_post];
 
     $json_file_new = json_encode($localita);
-    file_put_contents('test.json', $json_file_new);
+    file_put_contents('metadata/graph.json', $json_file_new);
 
     header("Location: chartPage.php");
 }

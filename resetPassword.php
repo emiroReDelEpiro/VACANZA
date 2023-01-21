@@ -2,15 +2,15 @@
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    use PHPMailer\PHPMailer\SMTP;
 
     require 'lib/PHPMailer-master/src/PHPMailer.php';
     require 'lib/PHPMailer-master/src/SMTP.php';
     require 'lib/vendor/autoload.php';
     
     $email = $_POST['email'];
+    echo $email;
 
-    $data = file_get_contents("login.json"); 
+    $data = file_get_contents("metadata/login.json"); 
     $jsonArray = json_decode($data, true);
     
     $valid = false;
@@ -27,7 +27,7 @@
 
             $jsonData = json_encode($jsonArray);
 
-            file_put_contents('login.json', $jsonData);
+            file_put_contents('metadata/login.json', $jsonData);
         }
         $cnt++;
     }
@@ -60,7 +60,7 @@
         $mail->isHTML(true);
 
         $mail->Subject = 'Reset password (PHP Project)';
-        $mail->Body    = 'Reset Account password by using this link: resetPasswordPage.php?token='.$token;
+        $mail->Body    = 'Reset Account password by using this link: http://localhost:8080/resetPasswordPage.php?token='.$token;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         if(!$mail->send()) {

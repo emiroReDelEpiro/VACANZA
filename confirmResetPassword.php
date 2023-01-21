@@ -7,7 +7,7 @@
     $token = $_SESSION['token'];
     $_SESSION['token'] = null;
 
-    $data = file_get_contents("login.json"); 
+    $data = file_get_contents("metadata/login.json"); 
     $jsonArray = json_decode($data, true);
 
     $valid = true;
@@ -21,7 +21,7 @@
 
     if($valid){
         
-        $data = file_get_contents("login.json"); 
+        $data = file_get_contents("metadata/login.json"); 
         $jsonArray = json_decode($data, true);
 
         $cnt = 0;
@@ -34,7 +34,7 @@
     
                 $jsonData = json_encode($jsonArray);
     
-                file_put_contents('login.json', $jsonData);
+                file_put_contents('metadata/login.json', $jsonData);
             }
             $cnt++;
         }
