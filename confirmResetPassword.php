@@ -29,7 +29,7 @@
         foreach($jsonArray as $value){
             if($value['token'] == $token){
     
-                $jsonArray[$cnt]['password'] = $password;
+                $jsonArray[$cnt]['password'] = password_hash($password, PASSWORD_DEFAULT);
                 $jsonArray[$cnt]['token'] = null;
     
                 $jsonData = json_encode($jsonArray);
