@@ -39,6 +39,7 @@
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'logged' => false,
             'type' => "supplier",
+            'token' => null
         ];
         
         $inp = file_get_contents('metadata/login.json');
